@@ -21,5 +21,5 @@ host=$host
     echo "Connected successfully";
  }
 
- pg_close($conn);
+// pg_close($conn);
 ?>
