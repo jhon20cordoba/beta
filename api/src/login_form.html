@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
+    <title>Register Form</title>
 </head>
 <body>
-    <a href="http://127.0.0.1/beta/" target="_blank">Go to home</a>
+    <table align="center">
+        <tr>
+            <td><h1><font size ="50" color=d85ab4><p align="center">Login Form</p></font></h1></td>
+            <td> <center><img src="images/users.jpeg" width="50"></center></td>
+        </tr>
+    </table>
+    <table align="center">
+            <form name="login_form" action="backend/signin.php" method="POST">
+                <tr><td><label>Email: </label></td></tr>
+                <tr><td><input type="email" name="email" placeholder="hello@gmail.com" required></td></tr>
+                <tr><td>Password: </td></tr>
+                <tr><td><input type="password" name="passwd" placeholder="......" tittle="ingrese su contraseña"required></td></tr>
+                <tr><td>Confirm Password: </td></tr>
+                <tr> <td><input type="password" name="passwdcon" required></td></tr>
+                <tr><td><button>Register</button></td></tr>
+           
+    </table>
+ </form>
+ <center>
+
+ <a href="http://127.0.0.1/beta/api/src/forgot_pass_form.html" target="_blank">
+    forgot password
+</a>
     
+ <a href="http://127.0.0.1/beta/api/src/forgot_pass_form.html" target="_blank">
+    Sing up
+
+ </a>
+</center>
 </body>
 </html>

@@ -1,32 +1,48 @@
 <?php
-     //DB connection
-     require('../../config/db_connection.php');
-     // Get data from regidter form 
+    //database connection
+    require('../../config/db_connection.php');
+    // get database from register form
+    $email = $_POST['email'];
+    $pass = $_POST['passwd'];
+    $pass2 = $_POST['passwdcon'];
+    $enc_pass = md5($pass);
 
-     $email = $_POST['email'];
-     $pass = $_POST['passwd'];
-     // Encrypt the password using MD5 hashing algorithm
-     $enc_pass = md5($pass);
-
-     //echo "Email: " . $email;
-     //echo "<br>Password: " . $pass;
-     //echo "<br>Encrypted Password: " . $enc_pass;
-
-  //query to insert data into users table
-    $query = "INSERT INTO users (email, password)
-     VALUES ('$email', '$enc_pass')
-     ";
-    
+    // Validate if email already exists
+    $query = "SELECT * FROM users WHERE email = '$email'";
     $result = pg_query($conn, $query);
+    $row = pg_fetch_assoc($result);
+    
+    if ($row) {
+        die("<br>El email ya está registrado.");
+    }else {
+        echo "<script>alert('restration successful')</script>";
+        header('refresh:0; url=http://127.0.0.1/beta/api/src/login_form.html');
+    }
+    
+    // Validate that passwords match
+    if ($pass !== $pass2) {
+    die("<br>Las contraseñas no coinciden.");
+    }
+    /*echo "email: " . $email;
+    echo "<br>password: " . $pass;
+    echo "<br>encrypted password: " . $enc_pass;
+    echo "<br>confirm password: " . $pass2;*/
+    
+    // query to insert data into users table
+    $query = "INSERT INTO users (email, password)
+     VALUES ('$email', '$enc_pass')";
+    
+    // execute the query
+    $result = pg_query($conn, $query);
+    echo "<script>alert('restration successful')</script>";
+    header('refresh:0; url=http://127.0.0.1/beta/api/src/login_form.html');
     
     if ($result) {
-        echo "Registration successful!";
+        echo "<br>Registro exitoso!";
     } else {
-        echo "Registration failed! ";
+        echo "Error en el registro: " . pg_last_error($conn);
     }
-    pg_close($conn);
     
     // close the database connection
-//pg_close($conn);
-
+    pg_close($conn);
 ?>
